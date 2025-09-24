@@ -1,4 +1,4 @@
-# Allow all (fine for a test site)
+# Allow all crawlers
 User-agent: *
 Allow: /
 
