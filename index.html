@@ -1,29 +1,1021 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Berachain Bridge | Secure Crypto Asset Bridging</title>
-    <meta name="description" content="Learn about the Berachain Bridge — a gateway for moving assets across blockchains. Explore how bridging works, updates, and resources for the Berachain ecosystem.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berachain - EVM-identical L1 aligning security and liquidity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Open Graph / Social Sharing -->
-    <meta property="og:title" content="Berachain Bridge | Secure Crypto Asset Bridging">
-    <meta property="og:description" content="Learn about the Berachain Bridge — a gateway for moving assets across blockchains.">
-    <meta property="og:url" content="https://berachain-bridge.co/">
-    <meta property="og:type" content="website">
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: white;
+            background: #000;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 100%);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .header.hidden {
+            transform: translateY(0);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            filter: brightness(0) saturate(100%) invert(95%) sepia(8%) saturate(750%) hue-rotate(315deg) brightness(105%) contrast(95%);
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .get-started-btn {
+            background: #FFD700;
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .get-started-btn:hover {
+            background: #FFA500;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section - Berachain Style */
+        .hero {
+            min-height: 60vh;
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 3rem 0;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            width: 100%;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-image {
+            flex: 0 0 auto;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-right: 1rem;
+        }
+
+        .hero-text {
+            flex: 1;
+            text-align: left;
+            margin: 0 1rem 0 2rem;
+        }
+
+        .panda-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+
+        .panda-image {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 0.6rem;
+            line-height: 1.1;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #404040;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .start-bridging-btn {
+            background: #FFD700;
+            color: #000;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 12px rgba(255, 215, 0, 0.3);
+        }
+
+        .start-bridging-btn:hover {
+            background: #FFA500;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+
+        /* Berachain Bridge Hero Section */
+        .berachain-bridge-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('jsll6tbj4psn9oxswpen.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .berachain-bridge-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .berachain-bridge-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .berachain-bridge-text {
+            font-size: 1.1rem;
+            color: white;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        /* What is Bridge Token Section */
+        .bridge-token-section {
+            background: black;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .bridge-token-content {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .bridge-token-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .bridge-token-text {
+            font-size: 1rem;
+            color: white;
+            line-height: 1.5;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background: black;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .benefits-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .benefits-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .benefit-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .benefit-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-card-text {
+            font-size: 0.85rem;
+            color: #e0e0e0;
+            line-height: 1.4;
+        }
+
+        /* Responsive Design for Benefits */
+        @media (max-width: 1024px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .benefits-title {
+                font-size: 1.5rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                max-width: 400px;
+            }
+            
+            .benefit-card {
+                padding: 1rem;
+            }
+        }
+
+        .benefit-card {
+            background: rgba(42, 42, 42, 0.9);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #444;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: #FFD700;
+            background: rgba(42, 42, 42, 0.95);
+        }
+
+        .benefit-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .benefit-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: white;
+        }
+
+        .benefit-text {
+            color: #ccc;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        /* Why Cross-Chain Bridges Section */
+        .why-section {
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 100%);
+            padding: 50px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+        }
+
+        .why-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            padding-top: 40px;
+        }
+
+        .why-bear {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 350px;
+            height: auto;
+            z-index: 5;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: black;
+            padding: 60px 0;
+        }
+
+        .faq-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .faq-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .faq-list {
+            background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 100%);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #3a3a3a;
+            padding: 1rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #FFD700;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question:hover .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            padding: 60px 0 30px;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .footer-column h4 {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #FFD700;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .footer-bottom p {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-legal a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: #FFD700;
+        }
+
+        .why-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .why-text {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .why-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .why-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .why-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .why-card-number {
+            width: 40px;
+            height: 40px;
+            background: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .why-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .why-card-text {
+            font-size: 0.9rem;
+            color: #e0e0e0;
+            line-height: 1.4;
+        }
+
+        .why-btn {
+            background: #FFD700;
+            color: #000;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .why-btn:hover {
+            background: #FFA500;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-image {
+                order: 2;
+                margin-bottom: 2rem;
+            }
+
+            .hero-text {
+                order: 1;
+                margin: 0;
+            }
+
+            .hero-title {
+                font-size: 1.7rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .mainnet-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .panda-container {
+                width: 250px;
+                height: 250px;
+            }
+
+
+            .why-title {
+                font-size: 1.6rem;
+            }
+
+            .faq-title {
+                font-size: 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .why-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .why-cards {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .berachain-bridge-title {
+                font-size: 1.5rem;
+            }
+
+            .berachain-bridge-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
   </head>
   <body>
-    <h1>Berachain Bridge</h1>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="logo-dark.svg" alt="Berachain Logo" class="logo-icon">
+                    <div class="logo-text">Berachain Bridge</div>
+                </div>
+                <button class="get-started-btn">Get Started</button>
+            </div>
+        </div>
+    </header>
 
-    <p>The Berachain Bridge is a blockchain gateway that enables users to move digital assets securely across chains. As part of the Berachain ecosystem, the bridge improves liquidity, enhances interoperability, and supports decentralized finance growth.</p>
+    <!-- Hero Section - Berachain Style -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-image">
+                <div class="panda-container">
+                    <img src="baloonbear.webp" alt="Berachain Panda with Balloons" class="panda-image">
+                </div>
+            </div>
+            
+            <div class="hero-text">
+                <h1 class="hero-title">Seamlessly Bridge Your Digital Assets Across Blockchains</h1>
+                
+                <p class="hero-subtitle">
+                    The official, secure, and most reliable way to transfer digital assets across blockchains.<br>
+                    Purpose-built for Berachain with enterprise-grade security, near-zero gas fees, and unmatched performance.<br>
+                    Move assets in minutes. Withdraw or rebalance across ecosystems with ease. Trust LayerZero infrastructure.
+                </p>
+                
+                <button class="start-bridging-btn">Start Bridging to Berachain Today</button>
+            </div>
+        </div>
+    </section>
 
-    <h2>What is the Berachain Bridge?</h2>
-    <p>The Berachain Bridge allows users to transfer tokens between Berachain and other blockchains, creating a more connected and liquid crypto ecosystem.</p>
 
-    <h2>How Does the Berachain Bridge Work?</h2>
-    <p>By locking assets on one blockchain and minting them on another, the Berachain Bridge provides seamless interoperability without compromising security.</p>
+    <!-- Berachain Bridge Hero Section -->
+    <section class="berachain-bridge-section">
+        <div class="container">
+            <div class="berachain-bridge-content">
+                <h2 class="berachain-bridge-title">Berachain Bridge (Bera Bridge) – The Fastest Way to Move Assets Across Blockchains</h2>
+                <p class="berachain-bridge-text">
+                    The Berachain Bridge is the official, secure, and most reliable way to transfer digital assets across blockchains. Whether you're moving tokens into Berachain or sending them back out, our bridge ensures seamless, low-cost, and lightning-fast transactions.
+                </p>
+                <p class="berachain-bridge-text">
+                    Unlike generic cross-chain tools, the Bera Bridge is purpose-built for Berachain, giving you enterprise-grade security, near-zero gas fees, and unmatched performance.
+                </p>
+            </div>
+        </div>
+    </section>
 
-    <h2>Learn More</h2>
-    <p>Want to know more? Visit our <a href="/about.html">About Berachain Bridge</a> page.</p>
+    <!-- What is Bridge Token Section -->
+    <section class="bridge-token-section">
+        <div class="container">
+            <div class="bridge-token-content">
+                <h2 class="bridge-token-title">What is a Bridge Token?</h2>
+                <p class="bridge-token-text">
+                    A bridge token is a digital asset that represents value transferred from one blockchain to another. Berabridge locks tokens on the source chain and mints equivalent tokens on the destination chain, enabling seamless value exchange and cross-chain compatibility.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="benefits-content">
+                <h2 class="benefits-title">Key Benefits of Using Berabridge for Token Transfers</h2>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="white"/>
+                            </svg>
+                        </div>
+                        <h3 class="benefit-card-title">Enhanced Security</h3>
+                        <p class="benefit-card-text">Protected by rigorous audits and cryptographic protocols.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="white"/>
+                            </svg>
+                        </div>
+                        <h3 class="benefit-card-title">Low Transaction Fees</h3>
+                        <p class="benefit-card-text">Optimized gas costs to keep bridging affordable.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 2V13H3L12 22V11H16L7 2Z" fill="white"/>
+                            </svg>
+                        </div>
+                        <h3 class="benefit-card-title">Ultra-Fast Transactions</h3>
+                        <p class="benefit-card-text">Experience near-instant asset transfers across chains.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="white"/>
+                            </svg>
+                        </div>
+                        <h3 class="benefit-card-title">User-Friendly Interface</h3>
+                        <p class="benefit-card-text">Simple, intuitive design for all experience levels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Cross-Chain Bridges Section -->
+    <section class="why-section">
+        <div class="container">
+            <div class="why-content">
+                <h2 class="why-title">Why Cross-Chain Bridges Are Essential</h2>
+                <p class="why-text">
+                    As DeFi, GameFi, and NFT ecosystems grow, cross-chain compatibility becomes essential. Berabridge facilitates asset mobility, allowing users to leverage different blockchain ecosystems, access unique dApps, and optimize their DeFi strategies.
+                </p>
+                
+                <div class="why-cards">
+                    <div class="why-card">
+                        <div class="why-card-number">1</div>
+                        <h3 class="why-card-title">Traders</h3>
+                        <p class="why-card-text">Arbitrage across ecosystems</p>
+                    </div>
+                    
+                    <div class="why-card">
+                        <div class="why-card-number">2</div>
+                        <h3 class="why-card-title">Stakers</h3>
+                        <p class="why-card-text">Deploy assets where yields are highest</p>
+                    </div>
+                    
+                    <div class="why-card">
+                        <div class="why-card-number">3</div>
+                        <h3 class="why-card-title">NFT Collectors</h3>
+                        <p class="why-card-text">Move digital ownership across chains</p>
+                    </div>
+                    
+                    <div class="why-card">
+                        <div class="why-card-number">4</div>
+                        <h3 class="why-card-title">Builders</h3>
+                        <p class="why-card-text">Tap into Berachain's unique ecosystem while staying connected to Ethereum, Polygon, BNB Chain, and more</p>
+                    </div>
+                </div>
+                
+                <button class="why-btn">Get Started with Berabridge</button>
+            </div>
+        </div>
+        <img src="air_bender_bera_zvzjny.png" alt="Berachain Bear" class="why-bear">
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-content">
+                <h2 class="faq-title">Berachain Bridge FAQ</h2>
+                
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What is the Berachain Bridge?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I bridge assets to Berachain?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Which networks are supported?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What fees are associated with bridging?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How long does the bridging process take?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Is the bridge secure?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What tokens can I bridge?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Where do I get support if I encounter issues?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo-dark.svg" alt="Berachain Logo" class="footer-logo-img">
+                    <span class="footer-brand">Berachain</span>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Bridge</h4>
+                        <ul>
+                            <li><a href="#">How it Works</a></li>
+                            <li><a href="#">Supported Networks</a></li>
+                            <li><a href="#">Fees</a></li>
+                            <li><a href="#">Security</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">Tutorials</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="#">Discord</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Telegram</a></li>
+                            <li><a href="#">GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Berachain. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar stays visible at all times - no scroll behavior needed
+    </script>
+
   </body>
 </html>
