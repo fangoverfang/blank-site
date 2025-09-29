@@ -1,5 +1,20 @@
-# Allow all crawlers
+# Robots.txt for berachain-bridge.co
+# Allow all major crawlers and point them to sitemap
+
 User-agent: *
 Allow: /
 
+# Block AI scraping bots that don’t help SEO
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: Bytespider
+Disallow: /
+
+# Sitemap location
 Sitemap: https://berachain-bridge.co/sitemap.xml
