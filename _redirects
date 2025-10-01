@@ -1,8 +1,9 @@
 # Make sure robots.txt is always served correctly
 /robots.txt   /robots.txt   200
 
-# Redirect www to non-www
-https://www.berachain-bridge.co/*  https://berachain-bridge.co/:splat  301
+# Redirect www to non-www (both HTTPS and HTTP)
+https://www.berachain-bridge.co/*   https://berachain-bridge.co/:splat   301
+http://www.berachain-bridge.co/*    https://berachain-bridge.co/:splat   301
 
-# Redirect HTTP to HTTPS
-http://berachain-bridge.co/*  https://berachain-bridge.co/:splat  301!
+# Redirect HTTP to HTTPS (apex)
+http://berachain-bridge.co/*        https://berachain-bridge.co/:splat   301!
